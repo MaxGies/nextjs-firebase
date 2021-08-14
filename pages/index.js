@@ -1,13 +1,43 @@
 import Head from 'next/head'
 
+import { useEffect, useState } from 'react'
+
 import styles from '../styles/Home.module.css'
 
 import { firestore } from "../utils/firebase"
+import { useCollection } from "react-firebase-hooks/firestore"
 
-const Home = (props) => {
+const Home = () => {
+  const [user, setUser] = useState([]);
+  const [ inputUserData, setInputUserData ] = useState({});
 
-  const addUserHandler = () => {
-    console.log(props.user)
+  const [dataUser, dataUserLoading, error] = useCollection(
+    firestore.collection('users'),
+    {}
+  );
+
+  useEffect(()=>{
+
+    if(!dataUserLoading && dataUser){
+      setUser( dataUser.docs.map( (doc) => ({
+        id: doc.id,...doc.data()
+      })))
+    }
+
+  },[dataUserLoading])
+
+  const addUserHandler = async () => {
+    console.log(user)
+
+    // await firestore.collection("users").doc(user[0].id).set({
+    //   user
+    //   ,
+    // })
+
+    await firestore.collection("users").doc(user[1].id).set({
+        user
+        ,
+      })
 
     // createUser({ gender: "ชาย", age: 23, job: "Frontend Developer"})
   }
@@ -28,22 +58,3 @@ const Home = (props) => {
 }
 
 export default Home;
-
-
-export const getServerSideProps = async (context) => {
-  const req = context.req;
-  const res = context.res;
-
-  const getData = await firestore.collection("users").get()
-  
-  const users = getData.docs.map((doc)=>({
-      id: doc.id,
-      ...doc.data(),
-  }))
-
-  return{
-    props: {
-      user: users,
-    }
-  }
-}
