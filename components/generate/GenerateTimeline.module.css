@@ -1,0 +1,88 @@
+.root {
+    margin: 1rem 2rem 0rem 2rem;
+}
+
+.base {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    gap: 3rem;
+}
+
+.textInfo {
+    display: block;
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.testColor {
+    color: #012d5e, #ffc107, #bbc7d4, #34577e, #27a743, #234973 ;
+}
+
+.topic {
+    color: #ffc107;
+    margin-top: 1rem;
+}
+
+.info {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info .infoUser{
+    width: 100%;
+    padding: 1rem 1rem 1.5rem 1rem;
+    color: #27a743;
+    background-color: #234973;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.info .infoUser .head{
+    margin: 0;
+}
+
+.inputFieldUser {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+    color: #bbc7d4;
+}
+
+.inputFieldUser .spawn2{
+    grid-column: span 2 / span 2;
+}
+
+.selecGender {
+    font-family: 'Prompt', sans-serif;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.ageInput {
+    font-family: 'Prompt', sans-serif;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.submitButton{
+    font-family: 'Prompt', sans-serif;
+    background-color: #ffc107;
+    padding: 0.5rem 5% 0.5rem 5%;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    width: auto;
+}
+
+.timeline {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid #ffc107;
+    padding: 1rem;
+}
