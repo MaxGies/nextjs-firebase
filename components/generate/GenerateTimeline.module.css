@@ -5,7 +5,7 @@
 .base {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: auto;
     gap: 3rem;
 }
@@ -83,6 +83,28 @@
     width: 60%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     border: 1px solid #ffc107;
     padding: 1rem;
+}
+
+.timelineUser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ffc107;
+    border-radius: 3rem;
+    width: auto;
+    padding: 1rem 10% 1rem 10%;
+}
+
+.timelineUserInfo {
+    margin: 0;
+}
+
+.timelineUserInfoJob {
+    margin: 0;
+    font-weight: bold;
 }
