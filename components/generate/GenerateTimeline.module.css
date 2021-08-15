@@ -119,7 +119,7 @@
     content: '';
     position: absolute;
     top: 1rem;
-    left:calc(25% + 10px);
+    left: calc(25% + 10px);
     bottom: 0px;
     width: 3px;
     background: #34577e;
@@ -211,6 +211,10 @@
     margin-left: auto;
     margin-top: 0.5rem;
     font-weight: bold;
+}
+
+.insertPlz {
+    color: #ffc107;
 }
 
 @media only screen and (max-width: 1024px) {
