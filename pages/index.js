@@ -19,12 +19,14 @@ const Home = () => {
         id: doc.id,...doc.data()
       })))
     }
+
+    console.log(user)
   },[dataUserLoading])
 
   const addUserHandler = async () => {
     console.log(user)
 
-    setInputUserData({})
+    // setInputUserData({})
 
     // await firestore.collection("users").doc(user[0].id).set({
     //   user
@@ -44,7 +46,7 @@ const Home = () => {
         <meta name="description" content="Covid Timeline Generator make you easy to generate your timeline" />
       </Head>
 
-      <GenerateTimeline />
+      <GenerateTimeline userInfo={user[1]} />
       
     </div>
   )

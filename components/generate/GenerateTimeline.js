@@ -10,7 +10,11 @@ const DUMMY_INFO = {
         "08:30" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lacinia dui vel rhoncus tempus. Integer eget ante elit. Mauris pretium lorem et nisl rutrum, in mattis lorem dignissim. Nulla mi lectus, faucibus nec ultricies vel, ornare in ligula. Maecenas eu vulputate orci, in luctus odio. Proin cursus ligula nisl, dictum bibendum odio luctus ac. Donec pulvinar nunc dui, ac tempor est luctus id. Vivamus elementum rhoncus elit a mollis. Pellentesque ullamcorper dui sit amet gravida vulputate. Ut sit amet aliquet quam, et sollicitudin sapien.",
         "12:30" : "ไปออกกำลังกายยามเที่ยง แดดร้อนๆ วิ่งได้ฟิลดี",
         "18:30" : "ซื้อเฉาก๋วยชากังลาวมาเพราะแดดร้อนๆก็ต้องเฉาก๋วยชากังลาว"
-    }
+    },
+    "2020-08-15" : {
+        "10:30" : "ไปร้านขายข้าวแกงแล้วเจอแหวนทองแดงก็เลยเก็บไว้ซื้อกับข้าวอร่อยๆร้อนๆไฟลนปากแต่ก็บอกว่าแรงแรงอีก",
+        "16:30" : "ไปซื้อชาย4หมี่เกี๊ยวแล้วร้องไห้เพราะเป็นเฟมินิส"
+    },
 }
 
 const GenerateTimeline = (props) => {
@@ -21,7 +25,7 @@ const GenerateTimeline = (props) => {
     const [ userDescription, setUserDescription ] = useState("")
 
     const userSubmitHandler = () => {
-
+        console.log(props.userInfo)
     }
 
     return(
@@ -67,30 +71,35 @@ const GenerateTimeline = (props) => {
                 </div>
 
 
-                <div className={classes.timeline}>
+                <div className={classes.tableTimeline}>
                     <h1 className={classes.topic}>Timeline</h1>
                     <div className={classes.timelineUser}>
                         <h3 className={classes.timelineUserInfo}>{`ผู้ป่วย${userGender} อายุ ${ userAge} ปี`}</h3>
                         <p className={classes.timelineUserInfoJob}>{`อาชีพ ${userJob}`}</p>
                     </div>
                     {DUMMY_INFO?
-                        <div>
+                        <div className={classes.timeline}>
                             {Object.entries(DUMMY_INFO).map((info, index)=>{
                                 return(
-                                    <div key={index}>
-                                        {info[0]}
+                                    <div key={index} className={classes.entireTimeline}>
+                                        <div className={classes.titleTimeline}>
+                                            {info[0]}
+                                        </div>
+                                        <div className={classes.contentTimeline}>
                                         {
                                             Object.entries(info[1]).map((info, index)=>{
                                                 return(
-                                                    <div key={index}>
-                                                        {info[0]}
+                                                    <div key={index} className={classes.contentTimeTelling}>
                                                         <p>
+                                                            <span className={classes.timeTelling}>{info[0]}</span>
                                                             {info[1]}
                                                         </p>
+                                                        <button className={classes.deleteTimeline}>x</button>
                                                     </div>
                                                 )
                                             })
                                         }
+                                        </div>
                                     </div>
                                 )
                             }) }

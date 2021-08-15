@@ -15,10 +15,6 @@
     margin: 0.5rem 0 0.5rem 0;
 }
 
-.testColor {
-    color: #012d5e, #ffc107, #bbc7d4, #34577e, #27a743, #234973 ;
-}
-
 .topic {
     color: #ffc107;
     margin-top: 1rem;
@@ -79,7 +75,11 @@
     width: auto;
 }
 
-.timeline {
+
+/* ----------------------------------------------------------------------- */
+
+
+.tableTimeline {
     width: 60%;
     display: flex;
     justify-content: center;
@@ -87,6 +87,7 @@
     flex-direction: column;
     border: 1px solid #ffc107;
     padding: 1rem;
+    margin-bottom: 1rem;
 }
 
 .timelineUser {
@@ -107,4 +108,138 @@
 .timelineUserInfoJob {
     margin: 0;
     font-weight: bold;
+}
+
+.timeline {
+    width: 100%;
+    padding: 1rem;
+    position: relative;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 1rem;
+    left:calc(25% + 10px);
+    bottom: 0px;
+    width: 3px;
+    background: #34577e;
+}
+.timeline::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.entireTimeline {
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+    position: relative;
+}
+.entireTimeline .titleTimeline{
+    margin-bottom: .5em;
+    float: left;
+    width: 25%;
+    padding-right: 1rem;
+    text-align: right;
+    position: relative;
+    color: #ffc107;
+}
+
+.entireTimeline .titleTimeline::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color:#ffc107;
+    border-radius:100%;
+    top: 8px;
+    right: -8px;
+    z-index: 99;
+}
+
+.contentTimeline {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0 0 1rem;
+    float: right;
+    width: 70%;
+    padding: 0 0.5rem 0 1rem;
+    color: #ffc107;
+    background-color: #34577e;
+    border-radius: 0.5rem;
+    z-index: 1;
+}
+.contentTimeline::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: -15px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0.5rem 1.5rem 0.5rem 0;
+    border-color: transparent #34577e transparent transparent;
+    z-index: 0;
+}
+.contentTimeline p {
+    color: #bbc7d4;
+    flex: 1;
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.contentTimeTelling {
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+}
+
+.timeTelling{
+    color: #ffc107;
+    padding-right: 0.5rem;
+}
+
+.deleteTimeline{
+    font-family: 'Prompt', sans-serif;
+    color: #bbc7d4;
+    background-color: #34577e; /* 34577e */
+    border-width: 0;
+    cursor: pointer;
+    margin-left: auto;
+    margin-top: 0.5rem;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 1024px) {
+    .base {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        gap: 3rem;
+        flex-direction: column;
+    }
+
+    .info {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tableTimeline {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 1px solid #ffc107;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
 }
