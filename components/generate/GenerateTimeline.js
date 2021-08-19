@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import classes from "./GenerateTimeline.module.css";
-import { useCollection } from "react-firebase-hooks/firestore"
+import { useCollection } from "react-firebase-hooks/firestore";
 import { firestore } from "../../utils/firebase";
 
 const GenerateTimeline = () => {
@@ -39,23 +39,26 @@ const GenerateTimeline = () => {
         let dateTime = userDate.split('T')
         
         if(user.timeline != undefined){
+            const newTimeLine = { [dateTime[0]] : { [dateTime[1]] : userDescription }}
             if(Object.keys(user.timeline).length > 0 ){
 
                 if(user.timeline[dateTime[0]] != undefined){
-                    user.timeline[dateTime[0]][dateTime[1]] = userDescription
+                    user.timeline[dateTime[0]][dateTime[1]] = userDescription;
                 }
 
-                await setTimeline(Object.assign({ [dateTime[0]] : { [dateTime[1]] : userDescription },}, user.timeline));
-                await sendDataFireStore(Object.assign({ [dateTime[0]] : { [dateTime[1]] : userDescription },}, user.timeline));
+                const addInfoTimeline = Object.assign(newTimeLine, user.timeline);
+                await setTimeline(addInfoTimeline);
+                await sendDataFireStore(addInfoTimeline);
                 
             }
             else{
-                await setTimeline(Object.assign({ [dateTime[0]] : { [dateTime[1]] : userDescription }, }))
-                await sendDataFireStore(Object.assign({ [dateTime[0]] : { [dateTime[1]] : userDescription }, }));
+                await setTimeline(Object.assign(newTimeLine));
+                await sendDataFireStore(Object.assign(newTimeLine));
             }
         }
 
-        document.getElementById('description').value = ''
+        setUserDescription("");
+        
     }
 
     const sendDataFireStore = async (dataToFireStore) => {
@@ -70,17 +73,24 @@ const GenerateTimeline = () => {
 
     const deleteInfoFromTimeline = async (date,time) => {
 
-        delete user.timeline[date][time];
+        if (confirm('Are you sure you want to save this thing into the database?')) {
+            delete user.timeline[date][time];
         
-        Object.keys(user.timeline).forEach(key => Object.keys(user.timeline[key]).length == 0 ? delete user.timeline[key] : 1  );
+            Object.keys(user.timeline).forEach(key => Object.keys(user.timeline[key]).length == 0 ? delete user.timeline[key] : 1  );
 
-        await firestore.collection("users").doc(user.id).set({
-            age: userAge,
-            gender: userGender,
-            job: userJob,
-            timeline : user.timeline
-            ,
-        });
+            await firestore.collection("users").doc(user.id).set({
+                age: userAge,
+                gender: userGender,
+                job: userJob,
+                timeline : user.timeline
+                ,
+            });
+            console.log('Thing was saved to the database.');
+          } else {
+            // Do nothing!
+            console.log('Thing was not saved to the database.');
+          }
+        
     }
 
     return(
@@ -118,7 +128,7 @@ const GenerateTimeline = () => {
                             </div>
                             <div className={classes.spawn2}>
                                 <label className={classes.textInfo} >รายละเอียด</label>
-                                <textarea rows="5" id="description" name="description" className={classes.ageInput} onChange={e => setUserDescription(e.target.value)} />
+                                <textarea rows="5" id="description" name="description" value={userDescription} className={classes.ageInput} onChange={e => setUserDescription(e.target.value)} />
                             </div>
                         </div>
                         <button type="submit" value="Submit" onClick={userSubmitHandler} className={classes.submitButton}>+เพิ่มข้อมูล</button>
